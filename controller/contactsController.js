@@ -1,5 +1,5 @@
 const { connectDb } = require('../db/db');
-const { ObjectId } = require('mongodb'); // Import the ObjectId class from the mongodb package
+const { ObjectId } = require('mongodb'); 
 
 const getContacts = async (req, res) => {
   const client = await connectDb();
@@ -20,8 +20,8 @@ const getContactById = async (req, res) => {
 const createContact = async (req, res) => {
   const client = await connectDb();
   const db = client.db();
-  const { firstName, lastName, email, favoriteColor, birthday } = req.body;
-  const contact = { firstName, lastName, email, favoriteColor, birthday };
+  const { firstname, lastname, email, favoriteColor, birthday } = req.body;
+  const contact = { firstname, lastname, email, favoriteColor, birthday };
   const result = await db.collection('contacts').insertOne(contact);
   client.close();
   res.send(result.insertedCount === 1 ? contact : { message: 'Error inserting contact' });
@@ -30,8 +30,8 @@ const createContact = async (req, res) => {
 const updateContactById = async (req, res) => {
   const client = await connectDb();
   const db = client.db();
-  const { firstName, lastName, email, favoriteColor, birthday } = req.body;
-  const contactData = { firstName, lastName, email, favoriteColor, birthday };
+  const { firstname, lastname, email, favoriteColor, birthday } = req.body;
+  const contactData = { firstname, lastname, email, favoriteColor, birthday };
   const result = await db.collection('contacts').updateOne(
     { _id: new ObjectId(req.params.id) },
     { $set: contactData }
