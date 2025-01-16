@@ -3,9 +3,7 @@ const router = express.Router();
 
 const contactsController = require('../controller/contactsController');
 
-// router.get('/', (req, res) => {
-//     res.send('Welcome to the Contacts API');
-//   });
+
 router.get('/', contactsController.getAll);
 
 router.get('/:id', contactsController.getSingle);
