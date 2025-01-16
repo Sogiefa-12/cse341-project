@@ -1,27 +1,25 @@
+
+
 [
-    {
-     "firstname" : "Jennifer",
-     "lastname" : "Jackson",
-     "email" : "jennyjack@gmail.com",
-     "favoriteColor" : "purple",
-     "birthday" : "1998-03-01"
-   },
-   
-   {
-     "firstname" : "Jason",
-     "lastname" : "Mike",
-     "email" : "mikejason@gmail.com",
-     "favoriteColor" : "red",
-     "birthday" :"2022-02-06"
-   },
-   
-   {
-     "firstname" : "Fetus",
-     "lastname" : "Yomi",
-     "email" : "festusyomi2@yahoo.com",
-     "favoriteColor" : "blue",
-     "birthday" : "2023-05-03"
-   }
-   
-   ]
-   
+  {
+    "firstName": "Jennifer",
+    "lastName": "Jackson",
+    "email": "jennyjack@gmail.com",
+    "favoriteColor": "purple",
+    "birthday": "01/03/1998"
+  },
+  {
+    "firstName": "Jason",
+    "lastName": "Mike",
+    "email": "mikejason@gmail.com",
+    "favoriteColor": "red",
+    "birthday": "06/02/2022"
+  },
+  {
+    "firstName": "Festus",
+    "lastName": "Yomi",
+    "email": "festusyomi2@yahoo.com",
+    "favoriteColor": "blue",
+    "birthday": "02/22/1995"
+  }
+]

@@ -1,29 +1,31 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-const { initDb } = require('./db/db');
+const mongodb = require('./db/db');
 const contactsRoutes = require('./routes/contactsRoutes');
-const PORT = process.env.PORT || 8080;
+const path = require('path');
 
-dotenv.config();
-
+const port = process.env.PORT || 8080;
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
-const startApp = async () => {
-  const PORT = process.env.PORT || 8080;
+app
+  .use(bodyParser.json())
+  .use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  })
+  .use(express.static('public')); // Serve static files from the 'public' directory
 
-  app.use('/contacts', contactsRoutes);
-  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
-
-  try {
-    const db = await initDb({});
-    console.log('Connected to MongoDB');
-  } catch (err) {
+mongodb.initDb((err) => {
+  if (err) {
     console.error('Error connecting to MongoDB:', err);
     process.exit(1);
-  }
-};
+  } else {
+    app.use('/contacts', contactsRoutes);
 
-startApp();
+    app.get('/', (req, res) => {
+      res.sendFile(path.join(__dirname + '/public/index.html'));
+    });
+
+    app.listen(port, () => console.log(`Connected to DB and listening on ${port}`));
+  }
+});
