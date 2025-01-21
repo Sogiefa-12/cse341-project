@@ -44,15 +44,15 @@ const createContact = async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       favoriteColor: req.body.favoriteColor,
-      birthday: req.body.birthday
+      birthday: req.body.birthday,
     };
 
     const response = await collection.insertOne(contact);
 
     if (response.acknowledged) {
-      res.status(201).json(response);
+      res.status(201).json(response.insertedId);
     } else {
-      res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+      res.status(500).json({ message: 'Error creating contact.' });
     }
   } catch (err) {
     console.error(err);
@@ -66,20 +66,19 @@ const updateContact = async (req, res) => {
     const collection = db.collection('contacts');
     const userId = new ObjectId(req.params.id);
 
-    const contact = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      favoriteColor: req.body.favoriteColor,
-      birthday: req.body.birthday
-    };
+    // Extract the fields from the request body to create the update document
+    const updateData = Object.assign({}, req.body);
 
-    const response = await collection.replaceOne({ _id: userId }, contact);
+    const response = await collection.findOneAndUpdate(
+      { _id: userId },
+      { $set: updateData },
+      { returnDocument: 'after' }
+    );
 
-    if (response.modifiedCount > 0) {
+    if (response.ok) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+      res.status(500).json({ message: 'Error updating contact.' });
     }
   } catch (err) {
     console.error(err);

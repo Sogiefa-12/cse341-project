@@ -157,7 +157,3 @@ updateBtn.addEventListener('click', () => {
     }
   });
 
-// // Fetch and display contacts on page load
-// window.addEventListener('DOMContentLoaded', () => {
-// getContacts();
-// });

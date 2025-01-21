@@ -1,0 +1,84 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "Contacts API",
+      "version": "1.0.0",
+      "description": "An API for managing contacts."
+    },
+    "paths": {
+      "/contacts": {
+        "get": {
+          "summary": "Get all contacts",
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new contact",
+          "responses": {
+            "201": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/contacts/{id}": {
+        "get": {
+          "summary": "Get a single contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a contact by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+        ]
+    },
+    "responses": {
+        "204": {
+            "description": "Success"
+        }
+    }
+    }
+    }
+}
